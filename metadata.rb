@@ -1,10 +1,10 @@
 name 'chef_ElasticGrafanaServer'
-maintainer 'The Authors'
-maintainer_email 'you@example.com'
+maintainer 'Aymen BEN MILED'
+maintainer_email 'aben-miled@talentsoft.com'
 license 'All Rights Reserved'
 description 'Installs/Configures chef_ElasticGrafanaServer'
 long_description 'Installs/Configures chef_ElasticGrafanaServer'
-version '0.1.0'
+version '0.1.1'
 chef_version '>= 12.1' if respond_to?(:chef_version)
 
 # The `issues_url` points to the location where issues for this cookbook are
@@ -18,3 +18,8 @@ chef_version '>= 12.1' if respond_to?(:chef_version)
 # a Supermarket.
 #
 # source_url 'https://github.com/<insert_org_here>/chef_ElasticGrafanaServer'
+
+depends 'openjdk'
+depends 'java'
+depends 'elasticsearch'
+

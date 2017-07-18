@@ -1,4 +1,4 @@
 # chef_ElasticGrafanaServer
-
-TODO: Enter the cookbook description here.
+This is the cookbook to create an Elasticsearch/Grafana server.
+This Server is used to aggregate web test report 
 
