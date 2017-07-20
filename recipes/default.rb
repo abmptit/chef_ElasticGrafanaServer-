@@ -24,13 +24,12 @@ elasticsearch_install 'elasticsearch' do
 end
 
 elasticsearch_configure 'elasticsearch' do
-    #allocated_memory '256m'
     jvm_options ['-Xms1512M','-Xmx1512M']
     configuration ({
     'cluster.name' => 'elasticsearch',
     'node.name' => 'nodeES01',
-    'network.host' => '0.0.0.0'
-    'path.repo' => '/etc/elasticsearch/backupsudo'
+    'network.host' => '0.0.0.0',
+    'path.repo' => '/etc/elasticsearch/backup'
     })
 end
 
@@ -50,17 +49,37 @@ dpkg_package 'grafana' do
 end
 
 execute 'install jdbranham-diagram-panel' do
-  command 'grafana-cli plugins install jdbranham-diagram-panel'
-end
-
-execute 'install Grafana Plugins' do
   command 'sudo grafana-cli plugins install jdbranham-diagram-panel'
+ end
+
+execute 'install grafana-piechart-panel' do
   command 'sudo grafana-cli plugins install grafana-piechart-panel'
+ end
+
+execute 'install savantly-heatmap-panel' do
   command 'sudo grafana-cli plugins install savantly-heatmap-panel'
+ end
+
+execute 'install natel-plotly-panel' do
   command 'sudo grafana-cli plugins install natel-plotly-panel'
+ end
+
+ execute 'install bessler-pictureit-panel' do
   command 'sudo grafana-cli plugins install bessler-pictureit-panel'
-  command 'sudo  grafana-cli plugins install briangann-datatable-panel'
-  command 'git clone https://github.com/TalentSoft/grafana-datatable-panel.git -- /var/lib/grafana/plugins/grafana-datatable-panel'
-  command 'git clone https://github.com/abmptit/WebTestsDashboard-app.git -- /var/lib/grafana/plugins/WebTestsDashboard-app'
-  command 'sudo /bin/systemctl restart grafana-server'
+ end
+
+ execute 'install briangann-datatable-panel' do
+  command 'sudo grafana-cli plugins install briangann-datatable-panel'
+ end
+
+execute 'install ts-datatable-panel' do
+    command 'git clone https://github.com/TalentSoft/grafana-datatable-panel.git -- /var/lib/grafana/plugins/ts-datatable-panel'
+ end
+
+execute 'restart grafana-server' do
+    command 'sudo /bin/systemctl restart grafana-server'
+ end
+
+execute 'install sqlite' do
+  command 'sudo apt install sqlite3'
 end
